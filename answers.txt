@@ -4,3 +4,5 @@ ii)For every 2^n new elements, the capacity doubles.
 iii)No.
 
 #Lab Question 2#
+Refer to main.cpp
+
