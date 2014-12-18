@@ -72,17 +72,18 @@ class Point {
   Point (int x = 0, int y = 0) : x(x), y(y) {}
   friend ostream& operator<< (ostream& os, Point& p) {
 
-    os<<p.x<<p.y;
+    os<<"("<<p.x<<","<<p.y<<")";
     return os;
 
   }
   friend istream& operator>> (istream& is, Point& p) {
     cout << "Input x y: ";
    is>>p.x>>p.y;
+   return is;
   }
   friend bool operator== (Point& left, Point& right) {
-     return left.x = right.x || left.y = right.y
-  }
+     return (left.x == right.x && left.y == right.y);
+}
 };
 
 template <typename T>
@@ -113,39 +114,70 @@ public:
 
   void insertBack (T& newElement) {
    Node <T> *newNode = new Node <T>;
-   newNode->= newElement;
+   newNode->info = newElement;
+   newNode->next=NULL;
+   if (start==NULL)
+   start=newNode;
+
+   else {
    Node <T> *ptr = start;
+   while(ptr->next != NULL)
    ptr = ptr->next;
-   delete ptr;
+   ptr->next = newNode;
+
+    }
 
   }
 
   bool insertAfter (T& target, T& newElement) {
-    Node <T> *newNode = new Node <T>;
-    newNode->info = newElement;
-    Node <T> *ptr = target;
-    ptr->next = newElement;
-    delete ptr;
-  }
+//        Node <T> *ptr;
+//        ptr->info = target;
+//        if(ptr=NULL){
+//            return false;
+//        }
+//
+//        Node <T> *newNode = new Node <T>;
+//        newNode->info = newElement;
+//        Node <T> *ptr2 = ptr->next;
+//        delete ptr;
+//        delete ptr2;
+        Node <T> *ptr = start;
+        while(ptr != NULL){
+        if(ptr->info=target){
+         Node <T> *newNode = new Node <T>;
+         ptr->next=newNode;
+        return;
+        }
 
+        ptr = ptr-> next;
+        }
+
+    }
   bool search (T& target) {
-    T item;
-    if (!first(item))
-    return false;
-    do if (item==target)
-    return true;
-    while (item->next);
 
-    return false;
+
 
   }
 
   void makeEmpty () {
-// Add code.
+     while (start!=NULL){
+    Node <T> *ptr = start;
+       start=start->next;
+       delete ptr;
+     }
+     ptr = NULL;
   }
 
   friend ostream& operator<< (ostream& os, LinkedList<T>& list) {
-  os<<list;
+    os<<"start ---> ";
+    Node <T> *ptr = list.start;
+    while (ptr != NULL){
+    os << ptr->info<<"--->";
+    ptr = ptr->next;
+    }
+    os <<" NULL";
+
+  return os;
   }
 };
 
@@ -190,3 +222,4 @@ int main() {
     }
   } while (choice >= 1 && choice <= 6);
 }
+
