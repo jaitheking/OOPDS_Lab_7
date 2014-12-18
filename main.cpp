@@ -72,17 +72,16 @@ class Point {
   Point (int x = 0, int y = 0) : x(x), y(y) {}
   friend ostream& operator<< (ostream& os, Point& p) {
 
+    os<<p.x<<p.y;
+    return os;
 
-
-
-// Add code.
   }
   friend istream& operator>> (istream& is, Point& p) {
     cout << "Input x y: ";
-// Add code.
+   is>>p.x>>p.y;
   }
   friend bool operator== (Point& left, Point& right) {
-// Add code.
+     return left.x = right.x || left.y = right.y
   }
 };
 
@@ -107,14 +106,14 @@ public:
   void insertFront (T& newElement) {
 
     Node <T> *newNode = new Node <T>;
-    newNode->info = element;
+    newNode->info = newElement;
     newNode->next = start;
     start = newNode;
   }
 
   void insertBack (T& newElement) {
    Node <T> *newNode = new Node <T>;
-   newNode->info = element;
+   newNode->= newElement;
    Node <T> *ptr = start;
    ptr = ptr->next;
    delete ptr;
@@ -122,16 +121,20 @@ public:
   }
 
   bool insertAfter (T& target, T& newElement) {
-// Add code.
+    Node <T> *newNode = new Node <T>;
+    newNode->info = newElement;
+    Node <T> *ptr = target;
+    ptr->next = newElement;
+    delete ptr;
   }
 
   bool search (T& target) {
     T item;
     if (!first(item))
     return false;
-    do if (item==element)
+    do if (item==target)
     return true;
-    while (getNext(item));
+    while (item->next);
 
     return false;
 
@@ -142,7 +145,7 @@ public:
   }
 
   friend ostream& operator<< (ostream& os, LinkedList<T>& list) {
-// Add code.
+  os<<list;
   }
 };
 
